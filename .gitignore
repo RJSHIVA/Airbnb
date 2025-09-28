@@ -5,6 +5,8 @@ server/node_modules/
 # Build folders
 client/build/
 server/dist/
-
+# Lock files (optional, agar aap ignore karna chahte ho)
+client/package-lock.json
+server/package-lock.json
 # Environment files
 *.env
