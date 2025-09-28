@@ -7,7 +7,7 @@ import {
   MenuRounded,
   SearchRounded,
 } from "@mui/icons-material";
-import { Avatar } from "@mui/material";
+import { Avatar, Menu } from "@mui/material";
 // import { logout } from "../redux/reducers/userSlice";
 import { useDispatch } from "react-redux";
 import LogoImg from "../utils/Images/Logo.svg";
@@ -119,16 +119,7 @@ const MobileMenu = styled.ul`
   z-index: ${({ isOpen }) => (isOpen ? "1000" : "-1000")};
 `;
 
-const Mobileicons = styled.div`
-  color: ${({ theme }) => theme.text_primary};
-  display: none;
-  @media screen and (max-width: 768px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-  }
-`;
+
 
 const TextButton = styled.div`
   text-align: end;
@@ -142,8 +133,49 @@ const TextButton = styled.div`
   }
 `;
 
-const Navbar = () => {
-  return <div>Navbar</div>;
+const Navbar = ({setOpenAuth,openAuth}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <Nav>
+      {" "}
+      <NavbarContainer>
+        <MobileIcon onClick={() => setIsOpen(!isOpen)}>
+          <MenuRounded style={{color: "white"}}/>
+        </MobileIcon>
+        <NavLogo>
+          <Logo src={LogoImg} />
+        </NavLogo>
+        {isOpen && (
+          <MobileMenu isOpen={isOpen}>
+            <Navlink onClick={() => setIsOpen(!isOpen)} to="/">Home</Navlink>
+            <Navlink onClick={() => setIsOpen(!isOpen)} to="/properties">places to stay</Navlink>
+            <Navlink onClick={() => setIsOpen(!isOpen)} to="/contact">Contact</Navlink>  
+
+            <Navlink onClick={() => setIsOpen(!isOpen)} to="/blogs">Blogs</Navlink>
+          
+           
+            <div style={{display: "flex", gap: "10px", marginTop: "10px"}}> 
+            <Button type = "secondary" text="SignUp" small onClick={()=> setOpenAuth(!openAuth)}/>
+            <Button  text="SignIn" small onClick={()=> setOpenAuth(!openAuth)}/>
+
+            </div>
+           
+          </MobileMenu>
+        )}             
+        <NavItems>
+         <Navlink to="/">Home</Navlink>
+           <Navlink to="/properties">places to stay</Navlink>
+            <Navlink to="/contact">Contact</Navlink>
+             <Navlink to="/blogs">Blogs</Navlink>
+        </NavItems>
+
+        <ButtonContainer>
+          <Button type = "secondary" text="SignIn" small onClick={()=> setOpenAuth(!openAuth)}
+/>
+        </ButtonContainer>
+      </NavbarContainer>
+    </Nav>
+  );
 };
 
 export default Navbar;

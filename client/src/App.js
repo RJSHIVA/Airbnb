@@ -27,7 +27,23 @@ const Container = styled.div`
 `;
 
 function App() {
-  return <div>App</div>;
+  const [openAuth, setOpenAuth] = useState(false);
+  return (
+    <ThemeProvider theme={lightTheme}>
+      <BrowserRouter>
+        <Container background={background}>
+          <Navbar setOpenAuth={setOpenAuth} openAuth={openAuth} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/properties" element={<PropertyListing />} />
+            <Route path="/properties/:id" element={<PropertyDetails />} />
+
+          </Routes>
+          {openAuth && (<Authentication setOpenAuth={setOpenAuth} openAuth={openAuth} />)}
+        </Container>
+      </BrowserRouter>
+    </ThemeProvider>
+  );
 }
 
 export default App;
